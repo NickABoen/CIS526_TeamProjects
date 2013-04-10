@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace CIS726_Assignment2.Models
+namespace CIS526_Database.Models
 {
     /// <summary>
     /// This model class represents a single course in the course catalog

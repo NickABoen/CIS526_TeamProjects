@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 using CIS726_Assignment2.ViewModels;
 using CIS726_Assignment2.Repositories;
 using PagedList;

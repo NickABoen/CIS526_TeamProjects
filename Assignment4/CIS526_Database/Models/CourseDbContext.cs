@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 using System.Data.Entity;
 
-namespace CIS726_Assignment2.Models
+namespace CIS526_Database.Models
 {
     public class CourseDBContext : DbContext
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CIS726_Assignment2.Tests;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 
 namespace CIS726_Assignment2.Tests
 {

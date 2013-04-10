@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -113,38 +116,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201303130442176_ChangeIDFieldsToGenericNameMig.cs" />
-    <Compile Include="Migrations\201303130442176_ChangeIDFieldsToGenericNameMig.Designer.cs">
-      <DependentUpon>201303130442176_ChangeIDFieldsToGenericNameMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303191658442_AddedPrerequisitesMig.cs" />
-    <Compile Include="Migrations\201303191658442_AddedPrerequisitesMig.Designer.cs">
-      <DependentUpon>201303191658442_AddedPrerequisitesMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303202127353_AddedUserAuthMig.cs" />
-    <Compile Include="Migrations\201303202127353_AddedUserAuthMig.Designer.cs">
-      <DependentUpon>201303202127353_AddedUserAuthMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303210025102_WorkingOnUsersMig.cs" />
-    <Compile Include="Migrations\201303210025102_WorkingOnUsersMig.Designer.cs">
-      <DependentUpon>201303210025102_WorkingOnUsersMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303211543466_DegreePlansAndMoreMig.cs" />
-    <Compile Include="Migrations\201303211543466_DegreePlansAndMoreMig.Designer.cs">
-      <DependentUpon>201303211543466_DegreePlansAndMoreMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303222003154_AddSemesterOrderFieldMig.cs" />
-    <Compile Include="Migrations\201303222003154_AddSemesterOrderFieldMig.Designer.cs">
-      <DependentUpon>201303222003154_AddSemesterOrderFieldMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303231854163_AddedShortNameforElectiveListMig.cs" />
-    <Compile Include="Migrations\201303231854163_AddedShortNameforElectiveListMig.Designer.cs">
-      <DependentUpon>201303231854163_AddedShortNameforElectiveListMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303232251475_AddedPlanCourseCreditsMig.cs" />
-    <Compile Include="Migrations\201303232251475_AddedPlanCourseCreditsMig.Designer.cs">
-      <DependentUpon>201303232251475_AddedPlanCourseCreditsMig.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseDbContext.cs" />
@@ -188,32 +159,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201303130442176_ChangeIDFieldsToGenericNameMig.resx">
-      <DependentUpon>201303130442176_ChangeIDFieldsToGenericNameMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303191658442_AddedPrerequisitesMig.resx">
-      <DependentUpon>201303191658442_AddedPrerequisitesMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303202127353_AddedUserAuthMig.resx">
-      <DependentUpon>201303202127353_AddedUserAuthMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303210025102_WorkingOnUsersMig.resx">
-      <DependentUpon>201303210025102_WorkingOnUsersMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303211543466_DegreePlansAndMoreMig.resx">
-      <DependentUpon>201303211543466_DegreePlansAndMoreMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303222003154_AddSemesterOrderFieldMig.resx">
-      <DependentUpon>201303222003154_AddSemesterOrderFieldMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303231854163_AddedShortNameforElectiveListMig.resx">
-      <DependentUpon>201303231854163_AddedShortNameforElectiveListMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303232251475_AddedPlanCourseCreditsMig.resx">
-      <DependentUpon>201303232251475_AddedPlanCourseCreditsMig.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CIS526_QueueManager\CIS526_SystemBusManager.csproj">

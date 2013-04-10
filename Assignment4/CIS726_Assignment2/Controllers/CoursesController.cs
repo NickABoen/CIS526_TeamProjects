@@ -5,10 +5,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 using PagedList;
 using CIS726_Assignment2.Repositories;
 using System.Messaging;
+using CIS526_QueueManager;
 
 namespace CIS726_Assignment2.Controllers
 {
@@ -23,8 +24,18 @@ namespace CIS726_Assignment2.Controllers
         public CoursesController()
         {
             CourseDBContext context = new CourseDBContext();
-            courses = new MessageQueueRepository<Course>(new BasicMessageQueuePublisher<Course>(@".\Private$\CourseQueue", new XmlMessageFormatter()));
-            prerequisiteCourses = new MessageQueueRepository<PrerequisiteCourse>(new BasicMessageQueuePublisher<PrerequisiteCourse>(@".\Private$\CourseQueue", new XmlMessageFormatter()));
+            courses = new MessageQueueRepository<Course>(new BasicMessageQueueProducer(
+                @".\Private$\CourseQueue",
+                new XmlMessageFormatter()
+                {
+                    TargetTypes = new Type[] { typeof(Course) }
+                }));
+            prerequisiteCourses = new MessageQueueRepository<PrerequisiteCourse>(new BasicMessageQueueProducer(
+                @".\Private$\CourseQueue",
+                new XmlMessageFormatter()
+                {
+                    TargetTypes = new Type[] { typeof(Course) }
+                }));
         }
 
         /// <summary>

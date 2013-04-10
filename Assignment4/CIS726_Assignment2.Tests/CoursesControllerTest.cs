@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CIS726_Assignment2.Controllers;
 using CIS726_Assignment2.Tests.Fakes;
 using CIS726_Assignment2.Repositories;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 using System.Web.Mvc;
 using PagedList;
 
@@ -21,7 +21,7 @@ namespace CIS726_Assignment2.Tests
         {
             storage = new GenericRepository<Course>(new FakeStorageContext<Course>());
             prereqs = new GenericRepository<PrerequisiteCourse>(new FakeStorageContext<PrerequisiteCourse>());
-            controller = new CoursesController(storage, prereqs);
+            //controller = new CoursesController(storage, prereqs);
             storage.Add(new Course(){
                 ID = 1,
                 coursePrefix = "AAA",
@@ -84,14 +84,14 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerIndexModelIsCourse()
         {
             ViewResult result = controller.Index("", 1, "") as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(PagedList.IPagedList<CIS726_Assignment2.Models.Course>));
+            Assert.IsInstanceOfType(result.Model, typeof(PagedList.IPagedList<CIS526_Database.Models.Course>));
         }
 
         [TestMethod]
         public void CoursesControllerSortByCourseNumberAsc()
         {
             ViewResult result = controller.Index("num_asc", 1, "") as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.Course> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            PagedList.IPagedList<CIS526_Database.Models.Course> model = result.Model as PagedList.IPagedList<CIS526_Database.Models.Course>;
             Course first = model[0];
             Course second = model[1];
             Assert.IsTrue(first.courseCatalogNumber.CompareTo(second.courseCatalogNumber) < 0);
@@ -104,7 +104,7 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerSortByCourseNumberDesc()
         {
             ViewResult result = controller.Index("num_desc", 1, "") as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.Course> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            PagedList.IPagedList<Course> model = result.Model as PagedList.IPagedList<Course>;
             Course first = model[0];
             Course second = model[1];
             Assert.IsTrue(first.courseCatalogNumber.CompareTo(second.courseCatalogNumber) > 0);
@@ -117,7 +117,7 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerSortByCourseTitleAsc()
         {
             ViewResult result = controller.Index("title_asc", 1, "") as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.Course> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            PagedList.IPagedList<Course> model = result.Model as PagedList.IPagedList<Course>;
             Course first = model[0];
             Course second = model[1];
             Assert.IsTrue(first.courseTitle.CompareTo(second.courseTitle) < 0);
@@ -130,7 +130,7 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerSortByCourseTitleDesc()
         {
             ViewResult result = controller.Index("title_desc", 1, "") as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.Course> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            PagedList.IPagedList<Course> model = result.Model as PagedList.IPagedList<Course>;
             Course first = model[0];
             Course second = model[1];
             Assert.IsTrue(first.courseTitle.CompareTo(second.courseTitle) > 0);
@@ -143,7 +143,7 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerSortByCourseHoursAsc()
         {
             ViewResult result = controller.Index("hours_asc", 1, "") as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.Course> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            PagedList.IPagedList<Course> model = result.Model as PagedList.IPagedList<Course>;
             Course first = model[0];
             Course second = model[1];
             Assert.IsTrue(first.courseHours.CompareTo(second.courseHours) < 0);
@@ -156,7 +156,7 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerSortByCourseHoursDesc()
         {
             ViewResult result = controller.Index("hours_desc", 1, "") as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.Course> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            PagedList.IPagedList<Course> model = result.Model as PagedList.IPagedList<Course>;
             Course first = model[0];
             Course second = model[1];
             Assert.IsTrue(first.courseHours.CompareTo(second.courseHours) > 0);
@@ -169,10 +169,10 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerFilterByPrefix()
         {
             ViewResult result = controller.Index("", 1, "prefix:AAA;") as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.Course> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            PagedList.IPagedList<Course> model = result.Model as PagedList.IPagedList<Course>;
             Assert.IsTrue(model.Count == 2);
             result = controller.Index("", 1, "prefix:BBB;") as ViewResult;
-            model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            model = result.Model as PagedList.IPagedList<Course>;
             Assert.IsTrue(model.Count == 1);
         }
 
@@ -180,10 +180,10 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerFilterByNumber()
         {
             ViewResult result = controller.Index("", 1, "minNum:121;maxNum:124") as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.Course> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            PagedList.IPagedList<Course> model = result.Model as PagedList.IPagedList<Course>;
             Assert.IsTrue(model.Count == 2);
             result = controller.Index("", 1, "minNum:125;maxNum:998") as ViewResult;
-            model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            model = result.Model as PagedList.IPagedList<Course>;
             Assert.IsTrue(model.Count == 1);
         }
 
@@ -191,10 +191,10 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerFilterByHours()
         {
             ViewResult result = controller.Index("", 1, "minHrs:3;maxHrs:6") as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.Course> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            PagedList.IPagedList<Course> model = result.Model as PagedList.IPagedList<Course>;
             Assert.IsTrue(model.Count == 2);
             result = controller.Index("", 1, "minHrs:7;maxHrs:8") as ViewResult;
-            model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            model = result.Model as PagedList.IPagedList<Course>;
             Assert.IsTrue(model.Count == 1);
         }
 
@@ -202,10 +202,10 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerFilterByCatalog()
         {
             ViewResult result = controller.Index("", 1, "ugrad") as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.Course> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            PagedList.IPagedList<Course> model = result.Model as PagedList.IPagedList<Course>;
             Assert.IsTrue(model.Count == 2);
             result = controller.Index("", 1, "grad") as ViewResult;
-            model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.Course>;
+            model = result.Model as PagedList.IPagedList<Course>;
             Assert.IsTrue(model.Count == 1);
         }
 
@@ -220,7 +220,7 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerDetailsModelIsCourse()
         {
             ViewResult result = controller.Details(1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(CIS726_Assignment2.Models.Course));
+            Assert.IsInstanceOfType(result.Model, typeof(Course));
         }
 
         [TestMethod]
@@ -278,7 +278,7 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerEditModelIsCourse()
         {
             ViewResult result = controller.Edit(1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(CIS726_Assignment2.Models.Course));
+            Assert.IsInstanceOfType(result.Model, typeof(Course));
         }
 
         [TestMethod]
@@ -320,7 +320,7 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerDeleteModelIsCourse()
         {
             ViewResult result = controller.Delete(1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(CIS726_Assignment2.Models.Course));
+            Assert.IsInstanceOfType(result.Model, typeof(Course));
         }
 
         [TestMethod]

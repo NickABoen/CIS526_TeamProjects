@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CIS726_Assignment2.Controllers;
 using CIS726_Assignment2.Tests.Fakes;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 using CIS726_Assignment2.ViewModels;
 using CIS726_Assignment2.Repositories;
 using System.Web.Mvc;
@@ -81,14 +81,14 @@ namespace CIS726_Assignment2.Tests
         public void UsersControllerIndexModelIsUser()
         {
             ViewResult result = controller.Index("", 1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(PagedList.IPagedList<CIS726_Assignment2.Models.User>));
+            Assert.IsInstanceOfType(result.Model, typeof(PagedList.IPagedList<User>));
         }
 
         [TestMethod]
         public void UsersControllerSortByUsernameAsc()
         {
             ViewResult result = controller.Index("title_asc", 1) as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.User> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.User>;
+            PagedList.IPagedList<User> model = result.Model as PagedList.IPagedList<User>;
             User first = model[0];
             User second = model[1];
             Assert.IsTrue(first.username.CompareTo(second.username) < 0);
@@ -98,7 +98,7 @@ namespace CIS726_Assignment2.Tests
         public void UsersControllerSortByUsernameTitleDesc()
         {
             ViewResult result = controller.Index("title_desc", 1) as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.User> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.User>;
+            PagedList.IPagedList<User> model = result.Model as PagedList.IPagedList<User>;
             User first = model[0];
             User second = model[1];
             Assert.IsTrue(first.username.CompareTo(second.username) > 0);
@@ -116,7 +116,7 @@ namespace CIS726_Assignment2.Tests
         {
             webSecurity.Login("Administrator", "");
             ViewResult result = controller.Details(1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(CIS726_Assignment2.Models.User));
+            Assert.IsInstanceOfType(result.Model, typeof(User));
         }
 
         [TestMethod]
@@ -174,7 +174,7 @@ namespace CIS726_Assignment2.Tests
         {
             webSecurity.Login("Administrator", "");
             ViewResult result = controller.Edit(1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(CIS726_Assignment2.Models.User));
+            Assert.IsInstanceOfType(result.Model, typeof(User));
         }
 
         [TestMethod]
@@ -215,7 +215,7 @@ namespace CIS726_Assignment2.Tests
         public void UsersControllerDeleteModelIsUser()
         {
             ViewResult result = controller.Delete(1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(CIS726_Assignment2.Models.User));
+            Assert.IsInstanceOfType(result.Model, typeof(User));
         }
 
         [TestMethod]

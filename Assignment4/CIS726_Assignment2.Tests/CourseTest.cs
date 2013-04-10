@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 using System.ComponentModel.DataAnnotations;
 using CIS726_Assignment2.Tests;
 

@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace CIS726_Assignment2.Models
+namespace CIS526_Database.Models
 {
     /// <summary>
     /// This class represents a single degree program. It has a list of required courses and a list of elective courses

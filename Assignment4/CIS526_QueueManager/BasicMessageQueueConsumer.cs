@@ -58,6 +58,7 @@ namespace CIS526_QueueManager
             Message recievedMessage = _queue.EndReceive(e.AsyncResult);
             //Let what ever owns this class process the data.
             recievedMessage.Body = NewMessage(recievedMessage.Label, recievedMessage.Body);
+            recievedMessage.BodyType = 1;
 
             //Send the processed data back into the queue.
             _queue.Send(recievedMessage);

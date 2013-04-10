@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
 
-namespace CIS726_Assignment2.Models
+namespace CIS526_Database.Models
 {
     [Table("Users")]
     public class User : IModel

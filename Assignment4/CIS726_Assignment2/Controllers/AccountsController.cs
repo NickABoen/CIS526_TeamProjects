@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 using CIS726_Assignment2.ViewModels;
 
 namespace CIS726_Assignment2.Controllers

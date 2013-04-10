@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Web;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 using CIS726_Assignment2.Repositories;
 
 namespace CIS726_Assignment2.Tests.Fakes

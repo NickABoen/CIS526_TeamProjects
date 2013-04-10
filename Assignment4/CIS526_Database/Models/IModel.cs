@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CIS726_Assignment2.Models
+namespace CIS526_Database.Models
 {
     /// <summary>
     /// This is the base class for all model classes. It is needed for the Repository framework to function correctly.

@@ -16,7 +16,7 @@ namespace CIS726_Assignment2
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        private PretendDatabase _magic;
+        private CIS526_Database.MvcApplication _databaseApp;
 
         protected void Application_Start()
         {
@@ -29,7 +29,13 @@ namespace CIS726_Assignment2
 
             WebSecurity.InitializeDatabaseConnection("CourseDBContext", "Users", "ID", "username", autoCreateTables: true);
 
-            _magic = new PretendDatabase();
+            _databaseApp = new CIS526_Database.MvcApplication();
+            _databaseApp.Init(); //I think?
+        }
+
+        protected void Application_End()
+        {
+            _databaseApp.Dispose();
         }
     }
 }

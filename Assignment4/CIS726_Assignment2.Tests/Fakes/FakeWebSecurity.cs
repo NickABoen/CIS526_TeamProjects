@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CIS726_Assignment2.Repositories;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 
 namespace CIS726_Assignment2.Tests.Fakes
 {

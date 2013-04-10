@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using CIS526_Database.Models;
 using CIS526_QueueManager;
 
 namespace CIS526_Database
@@ -36,7 +37,12 @@ namespace CIS526_Database
 
         private void InitQueues()
         {
-            _coursesQueue = new BasicMessageQueueConsumer(@"/.Private$/Courses", new XmlMessageFormatter());
+            _coursesQueue = new BasicMessageQueueConsumer(
+                @"/.Private$/Courses", 
+                new XmlMessageFormatter() 
+                { 
+                    TargetTypes = new Type[] { typeof(Course) }
+                });
             _coursesQueue.NewMessage += _coursesQueue_NewMessage;
             _coursesQueue.BeginProcessing();
         }

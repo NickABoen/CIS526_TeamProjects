@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
+using CIS526_QueueManager;
+using System.Linq.Expressions;
 
 namespace CIS726_Assignment2.Repositories
 {
@@ -14,38 +16,38 @@ namespace CIS726_Assignment2.Repositories
         : IGenericRepository<T> 
         where T : IModel
     {
-        private IMessageQueuePublisher<T> _publisher;
+        private IMessageQueueProducer _publisher;
 
-        public MessageQueueRepository(IMessageQueuePublisher<T> publisher)
+        public MessageQueueRepository(IMessageQueueProducer publisher)
         {
             _publisher = publisher;
         }
 
         public IQueryable<T> GetAll()
         {
-            return _publisher.GetAll().AsQueryable();
+            return (IQueryable<T>)_publisher.GetAll().AsQueryable();
         }
 
-        public IQueryable<T> Where(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
+        public IQueryable<T> Where(Expression<Func<T, bool>> predicate)
         {
-            return _publisher.GetAll().AsQueryable().Where(predicate);
+            return ((IQueryable<T>)_publisher.GetAll()).AsQueryable().Where(predicate);
         }
 
         public T Find(int id)
         {
             //TODO make this better.
             //Currently querires the list for a specific id.
-            return _publisher.GetAll().AsQueryable().Where((x) => x.ID == id).First();
+            return ((IQueryable<T>)_publisher.GetAll().AsQueryable()).Where((x) => x.ID == id).First();
         }
 
         public void Add(T entity)
         {
-            _publisher.Create(new List<T>() { entity });
+            _publisher.Create(new List<object>() { entity });
         }
 
         public void Remove(T entity)
         {
-            _publisher.Remove(new List<T>() { entity });
+            _publisher.Remove(new List<object>() { entity });
         }
 
         public void Edit(T entity)
@@ -55,7 +57,7 @@ namespace CIS726_Assignment2.Repositories
 
         public void UpdateValues(T entity, T item)
         {
-            _publisher.Update(new List<T>() { item });
+            _publisher.Update(new List<object>() { item });
         }
 
         public void SaveChanges()

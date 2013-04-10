@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CIS726_Assignment2.Controllers;
 using CIS726_Assignment2.Tests.Fakes;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 using CIS726_Assignment2.Repositories;
 using System.Web.Mvc;
 using PagedList;
@@ -168,14 +168,14 @@ namespace CIS726_Assignment2.Tests
         public void DegreeProgramsControllerIndexModelIsDegreeProgram()
         {
             ViewResult result = controller.Index("", 1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(PagedList.IPagedList<CIS726_Assignment2.Models.DegreeProgram>));
+            Assert.IsInstanceOfType(result.Model, typeof(PagedList.IPagedList<DegreeProgram>));
         }
 
         [TestMethod]
         public void DegreeProgramsControllerSortByDegreeProgramTitleAsc()
         {
             ViewResult result = controller.Index("title_asc", 1) as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.DegreeProgram> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.DegreeProgram>;
+            PagedList.IPagedList<DegreeProgram> model = result.Model as PagedList.IPagedList<DegreeProgram>;
             DegreeProgram first = model[0];
             DegreeProgram second = model[1];
             Assert.IsTrue(first.degreeProgramName.CompareTo(second.degreeProgramName) < 0);
@@ -185,7 +185,7 @@ namespace CIS726_Assignment2.Tests
         public void DegreeProgramsControllerSortByDegreeProgramTitleDesc()
         {
             ViewResult result = controller.Index("title_desc", 1) as ViewResult;
-            PagedList.IPagedList<CIS726_Assignment2.Models.DegreeProgram> model = result.Model as PagedList.IPagedList<CIS726_Assignment2.Models.DegreeProgram>;
+            PagedList.IPagedList<DegreeProgram> model = result.Model as PagedList.IPagedList<DegreeProgram>;
             DegreeProgram first = model[0];
             DegreeProgram second = model[1];
             Assert.IsTrue(first.degreeProgramName.CompareTo(second.degreeProgramName) > 0);
@@ -202,7 +202,7 @@ namespace CIS726_Assignment2.Tests
         public void CoursesControllerDetailsModelIsDegreeProgram()
         {
             ViewResult result = controller.Details(1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(CIS726_Assignment2.Models.DegreeProgram));
+            Assert.IsInstanceOfType(result.Model, typeof(DegreeProgram));
         }
 
         [TestMethod]
@@ -257,7 +257,7 @@ namespace CIS726_Assignment2.Tests
         public void DegreeProgramsControllerEditModelIsDegreeProgram()
         {
             ViewResult result = controller.Edit(1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(CIS726_Assignment2.Models.DegreeProgram));
+            Assert.IsInstanceOfType(result.Model, typeof(DegreeProgram));
         }
 
         [TestMethod]
@@ -296,7 +296,7 @@ namespace CIS726_Assignment2.Tests
         public void DegreeProgramsControllerDeleteModelIsDegreeProgram()
         {
             ViewResult result = controller.Delete(1) as ViewResult;
-            Assert.IsInstanceOfType(result.Model, typeof(CIS726_Assignment2.Models.DegreeProgram));
+            Assert.IsInstanceOfType(result.Model, typeof(DegreeProgram));
         }
 
         [TestMethod]

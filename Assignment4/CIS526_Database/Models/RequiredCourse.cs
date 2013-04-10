@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CIS726_Assignment2.Models
+namespace CIS526_Database.Models
 {
     /// <summary>
     /// This class represents a required course in a degree program, and is the many-to-many link between

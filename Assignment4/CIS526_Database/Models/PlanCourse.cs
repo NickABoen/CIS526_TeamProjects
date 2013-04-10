@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace CIS726_Assignment2.Models
+namespace CIS526_Database.Models
 {
 
     /// <summary>

@@ -1,4 +1,4 @@
-namespace CIS726_Assignment2.Migrations
+/*namespace CIS726_Assignment2.Migrations
 {
     using CIS726_Assignment2.Models;
     using System;
@@ -25,7 +25,7 @@ namespace CIS726_Assignment2.Migrations
          * XMLReader Code from Microsoft Tutorials
          * http://support.microsoft.com/kb/307548
          * 
-         */
+         *//*
         protected override void Seed(CIS726_Assignment2.Models.CourseDBContext context)
         {
             bool seedAll = true;
@@ -679,4 +679,4 @@ namespace CIS726_Assignment2.Migrations
             }
         }
     }
-}
+}*/

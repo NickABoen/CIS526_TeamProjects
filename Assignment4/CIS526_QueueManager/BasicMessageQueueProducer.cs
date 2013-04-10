@@ -35,6 +35,7 @@ namespace CIS526_QueueManager
             Message messageToReceive;
             try
             {
+                //I guess this breaks if it doesn't find a message. Wonderful.
                 messageToReceive = _queue.ReceiveById(messageId);
             }
             catch
@@ -83,6 +84,7 @@ namespace CIS526_QueueManager
             Message messageToSend = new Message();
             messageToSend.Label = action;
             messageToSend.Body = data;
+            messageToSend.BodyType = 1;
 
             _queue.Send(messageToSend);
 

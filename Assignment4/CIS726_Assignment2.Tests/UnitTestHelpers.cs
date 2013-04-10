@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using CIS726_Assignment2.Models;
+using CIS526_Database.Models;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

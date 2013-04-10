@@ -131,6 +131,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CIS526_Database\CIS526_Database.csproj">
+      <Project>{aba7c261-4e8a-45c6-a401-d8be71dd4004}</Project>
+      <Name>CIS526_Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CIS526_QueueManager\CIS526_SystemBusManager.csproj">
+      <Project>{f4242c4c-53e4-484e-b76d-d4768f2da75d}</Project>
+      <Name>CIS526_SystemBusManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CIS726_Assignment2\CIS726_Assignment2.csproj">
       <Project>{F5C1B19A-46A7-49CF-9781-DAEF7FF9D915}</Project>
       <Name>CIS726_Assignment2</Name>
