@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ABA7C261-4E8A-45C6-A401-D8BE71DD4004}</ProjectGuid>
+    <ProjectGuid>{F4242C4C-53E4-484E-B76D-D4768F2DA75D}</ProjectGuid>
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CIS526_Database</RootNamespace>
-    <AssemblyName>CIS526_Database</AssemblyName>
+    <RootNamespace>CIS526_QueueManager</RootNamespace>
+    <AssemblyName>CIS526_QueueManager</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -44,7 +44,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Web.DynamicData" />
@@ -106,121 +105,15 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303130442176_ChangeIDFieldsToGenericNameMig.cs" />
-    <Compile Include="Migrations\201303130442176_ChangeIDFieldsToGenericNameMig.Designer.cs">
-      <DependentUpon>201303130442176_ChangeIDFieldsToGenericNameMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303191658442_AddedPrerequisitesMig.cs" />
-    <Compile Include="Migrations\201303191658442_AddedPrerequisitesMig.Designer.cs">
-      <DependentUpon>201303191658442_AddedPrerequisitesMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303202127353_AddedUserAuthMig.cs" />
-    <Compile Include="Migrations\201303202127353_AddedUserAuthMig.Designer.cs">
-      <DependentUpon>201303202127353_AddedUserAuthMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303210025102_WorkingOnUsersMig.cs" />
-    <Compile Include="Migrations\201303210025102_WorkingOnUsersMig.Designer.cs">
-      <DependentUpon>201303210025102_WorkingOnUsersMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303211543466_DegreePlansAndMoreMig.cs" />
-    <Compile Include="Migrations\201303211543466_DegreePlansAndMoreMig.Designer.cs">
-      <DependentUpon>201303211543466_DegreePlansAndMoreMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303222003154_AddSemesterOrderFieldMig.cs" />
-    <Compile Include="Migrations\201303222003154_AddSemesterOrderFieldMig.Designer.cs">
-      <DependentUpon>201303222003154_AddSemesterOrderFieldMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303231854163_AddedShortNameforElectiveListMig.cs" />
-    <Compile Include="Migrations\201303231854163_AddedShortNameforElectiveListMig.Designer.cs">
-      <DependentUpon>201303231854163_AddedShortNameforElectiveListMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303232251475_AddedPlanCourseCreditsMig.cs" />
-    <Compile Include="Migrations\201303232251475_AddedPlanCourseCreditsMig.Designer.cs">
-      <DependentUpon>201303232251475_AddedPlanCourseCreditsMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\CourseDbContext.cs" />
-    <Compile Include="Models\DegreeProgram.cs" />
-    <Compile Include="Models\ElectiveCourse.cs" />
-    <Compile Include="Models\ElectiveList.cs" />
-    <Compile Include="Models\ElectiveListCourse.cs" />
-    <Compile Include="Models\IModel.cs" />
-    <Compile Include="Models\Plan.cs" />
-    <Compile Include="Models\PlanCourse.cs" />
-    <Compile Include="Models\PrerequisiteCourse.cs" />
-    <Compile Include="Models\RequiredCourse.cs" />
-    <Compile Include="Models\Semester.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="BasicMessageQueueConsumer.cs" />
+    <Compile Include="BasicMessageQueueProducer.cs" />
+    <Compile Include="IMessageQueueConsumer.cs" />
+    <Compile Include="IMessageQueueProducer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Global.asax" />
-    <EmbeddedResource Include="SeedData\ksu_courses.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SeedData\ksu_degreeprograms.xml" />
-    <EmbeddedResource Include="SeedData\ksu_electivecourses.xml" />
-    <EmbeddedResource Include="SeedData\ksu_electivelistcourses.xml" />
-    <EmbeddedResource Include="SeedData\ksu_electivelists.xml" />
-    <EmbeddedResource Include="SeedData\ksu_prerequisitecourses.xml" />
-    <EmbeddedResource Include="SeedData\ksu_requiredcourses.xml" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201303130442176_ChangeIDFieldsToGenericNameMig.resx">
-      <DependentUpon>201303130442176_ChangeIDFieldsToGenericNameMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303191658442_AddedPrerequisitesMig.resx">
-      <DependentUpon>201303191658442_AddedPrerequisitesMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303202127353_AddedUserAuthMig.resx">
-      <DependentUpon>201303202127353_AddedUserAuthMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303210025102_WorkingOnUsersMig.resx">
-      <DependentUpon>201303210025102_WorkingOnUsersMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303211543466_DegreePlansAndMoreMig.resx">
-      <DependentUpon>201303211543466_DegreePlansAndMoreMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303222003154_AddSemesterOrderFieldMig.resx">
-      <DependentUpon>201303222003154_AddSemesterOrderFieldMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303231854163_AddedShortNameforElectiveListMig.resx">
-      <DependentUpon>201303231854163_AddedShortNameforElectiveListMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303232251475_AddedPlanCourseCreditsMig.resx">
-      <DependentUpon>201303232251475_AddedPlanCourseCreditsMig.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CIS526_QueueManager\CIS526_SystemBusManager.csproj">
-      <Project>{f4242c4c-53e4-484e-b76d-d4768f2da75d}</Project>
-      <Name>CIS526_SystemBusManager</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -239,7 +132,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8402/</IISUrl>
+          <IISUrl>http://localhost:1081/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

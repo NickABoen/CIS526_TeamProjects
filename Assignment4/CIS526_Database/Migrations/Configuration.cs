@@ -6,7 +6,6 @@ namespace CIS726_Assignment2.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Xml;
-    using System.Windows.Forms;
     using System.Reflection;
     using WebMatrix.WebData;
     using System.Web.Security;

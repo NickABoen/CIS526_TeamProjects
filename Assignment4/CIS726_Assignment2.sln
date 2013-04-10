@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIS526_Database", "CIS526_D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIS526_Database.Tests", "CIS526_Database.Tests\CIS526_Database.Tests.csproj", "{A075204D-2466-4067-9BFD-2EBD1F5D48F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIS526_SystemBusManager", "CIS526_QueueManager\CIS526_SystemBusManager.csproj", "{F4242C4C-53E4-484E-B76D-D4768F2DA75D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{A075204D-2466-4067-9BFD-2EBD1F5D48F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A075204D-2466-4067-9BFD-2EBD1F5D48F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A075204D-2466-4067-9BFD-2EBD1F5D48F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4242C4C-53E4-484E-B76D-D4768F2DA75D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4242C4C-53E4-484E-B76D-D4768F2DA75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4242C4C-53E4-484E-B76D-D4768F2DA75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4242C4C-53E4-484E-B76D-D4768F2DA75D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
