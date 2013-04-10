@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIS726_Assignment2", "CIS72
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIS726_Assignment2.Tests", "CIS726_Assignment2.Tests\CIS726_Assignment2.Tests.csproj", "{50FD0221-E76F-469F-8D7C-89606F6D86F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIS526_Database", "CIS526_Database\CIS526_Database.csproj", "{ABA7C261-4E8A-45C6-A401-D8BE71DD4004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIS526_Database.Tests", "CIS526_Database.Tests\CIS526_Database.Tests.csproj", "{A075204D-2466-4067-9BFD-2EBD1F5D48F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,14 @@ Global
 		{50FD0221-E76F-469F-8D7C-89606F6D86F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50FD0221-E76F-469F-8D7C-89606F6D86F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50FD0221-E76F-469F-8D7C-89606F6D86F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABA7C261-4E8A-45C6-A401-D8BE71DD4004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA7C261-4E8A-45C6-A401-D8BE71DD4004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA7C261-4E8A-45C6-A401-D8BE71DD4004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA7C261-4E8A-45C6-A401-D8BE71DD4004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A075204D-2466-4067-9BFD-2EBD1F5D48F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A075204D-2466-4067-9BFD-2EBD1F5D48F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A075204D-2466-4067-9BFD-2EBD1F5D48F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A075204D-2466-4067-9BFD-2EBD1F5D48F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

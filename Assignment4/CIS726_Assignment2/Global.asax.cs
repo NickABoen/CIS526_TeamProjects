@@ -16,6 +16,8 @@ namespace CIS726_Assignment2
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        private PretendDatabase _magic;
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -26,6 +28,8 @@ namespace CIS726_Assignment2
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             WebSecurity.InitializeDatabaseConnection("CourseDBContext", "Users", "ID", "username", autoCreateTables: true);
+
+            _magic = new PretendDatabase();
         }
     }
 }

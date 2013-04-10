@@ -67,7 +67,15 @@ namespace CIS726_Assignment2
             string messageId = sendMessage("GET", null);
 
             //Wait for the database to respond.
-            Message messageToReceive = _queue.ReceiveById(messageId);
+            Message messageToReceive;
+            try
+            {
+                messageToReceive = _queue.ReceiveById(messageId);
+            }
+            catch
+            {
+                messageToReceive = null;
+            }
 
             //If the message is not null then the database gave use something. Return that.
             if (messageToReceive != null)
@@ -152,6 +160,7 @@ namespace CIS726_Assignment2
     /// <typeparam name="T">IModel type</typeparam>
     public class BasicMessageQueueConsumer<T> 
         : IMessageQueueConsumer<T>
+        where T : IModel
     {
         MessageQueue _queue;
         private bool _recieving;

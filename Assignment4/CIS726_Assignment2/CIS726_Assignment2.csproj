@@ -195,8 +195,10 @@
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\PlanCourse.cs" />
     <Compile Include="Models\Semester.cs" />
+    <Compile Include="PretendDatabase.cs" />
     <Compile Include="Repositories\IRoles.cs" />
     <Compile Include="Repositories\IWebSecurity.cs" />
+    <Compile Include="Repositories\MessageQueueRepository.cs" />
     <Compile Include="Repositories\RolesImpl.cs" />
     <Compile Include="Repositories\WebSecurityImpl.cs" />
     <Compile Include="SystemBusManager.cs" />

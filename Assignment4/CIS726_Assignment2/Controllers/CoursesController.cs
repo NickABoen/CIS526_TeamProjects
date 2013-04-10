@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using CIS726_Assignment2.Models;
 using PagedList;
 using CIS726_Assignment2.Repositories;
+using System.Messaging;
 
 namespace CIS726_Assignment2.Controllers
 {
@@ -16,17 +17,14 @@ namespace CIS726_Assignment2.Controllers
         private IGenericRepository<Course> courses;
         private IGenericRepository<PrerequisiteCourse> prerequisiteCourses;
 
-        private MessageQueuePublisher _publisher;
-        private MessageQueueConsumer _consumer;
-
         /// <summary>
         /// Constructor used by the web application itself
         /// </summary>
         public CoursesController()
         {
             CourseDBContext context = new CourseDBContext();
-            courses = new GenericRepository<Course>(new StorageContext<Course>(context));
-            prerequisiteCourses = new GenericRepository<PrerequisiteCourse>(new StorageContext<PrerequisiteCourse>(context));
+            courses = new MessageQueueRepository<Course>(new BasicMessageQueuePublisher<Course>(@".\Private$\CourseQueue", new XmlMessageFormatter()));
+            prerequisiteCourses = new MessageQueueRepository<PrerequisiteCourse>(new BasicMessageQueuePublisher<PrerequisiteCourse>(@".\Private$\CourseQueue", new XmlMessageFormatter()));
         }
 
         /// <summary>
