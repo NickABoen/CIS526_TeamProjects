@@ -86,15 +86,15 @@ namespace CIS726_Assignment2.Tests
             {
                 ID = 1,
                 degreeProgramName = "Degree Program 1",
-                requiredCourses = new Collection<RequiredCourse>(),
-                electiveCourses = new Collection<ElectiveCourse>(),
+                requiredCourses = new List<RequiredCourse>(),
+                electiveCourses = new List<ElectiveCourse>(),
             });
             degreePrograms.Add(new DegreeProgram()
             {
                 ID = 2,
                 degreeProgramName = "Degree Program 2",
-                requiredCourses = new Collection<RequiredCourse>(),
-                electiveCourses = new Collection<ElectiveCourse>(),
+                requiredCourses = new List<RequiredCourse>(),
+                electiveCourses = new List<ElectiveCourse>(),
             });
 
             requiredCourses.Add(new RequiredCourse()
@@ -151,8 +151,8 @@ namespace CIS726_Assignment2.Tests
             {
                 ID = 3,
                 degreeProgramName = "Degree Program 3",
-                requiredCourses = new Collection<RequiredCourse>(),
-                electiveCourses = new Collection<ElectiveCourse>(),
+                requiredCourses = new List<RequiredCourse>(),
+                electiveCourses = new List<ElectiveCourse>(),
             };
             return temp;
         }

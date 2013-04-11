@@ -10,30 +10,32 @@ namespace CIS526_QueueManager
     /// A basic implementation of the MessageQueueConsumer.
     /// </summary>
     /// <typeparam name="T">IModel type</typeparam>
-    public class BasicMessageQueueConsumer
-        : IMessageQueueConsumer
+    public class BasicMessageQueueConsumer<T>
+        : IMessageQueueConsumer<T>
     {
-        MessageQueue _queue;
+        MessageQueue _producerQueue; //This is the queue used by the Controller
+        MessageQueue _consumerQueue; //This is the queue used by the database
+
         private bool _recieving;
 
         public BasicMessageQueueConsumer(string queueName, IMessageFormatter formatter)
         {
-            if (MessageQueue.Exists(queueName))
-                _queue = new MessageQueue(queueName);
-            else
-                _queue = MessageQueue.Create(queueName);
-            _queue.Formatter = formatter;
-            _queue.ReceiveCompleted += _queue_ReceiveCompleted;
+            Util.CreateProducerAndConsumerQueues(queueName,
+                out _producerQueue,
+                out _consumerQueue);
+            _consumerQueue.Formatter = new ResponseFormatter();
+            _producerQueue.ReceiveCompleted += _queue_ReceiveCompleted;
+            _producerQueue.Formatter = new RequestFormatter();
         }
 
         #region IMessageQueueConsumer members
 
-        public event NewMessageHandler NewMessage;
+        public event NewMessageHandler<T> NewMessage;
 
         public void BeginProcessing()
         {
             _recieving = true;
-            _queue.BeginReceive();
+            _producerQueue.BeginReceive();
         }
 
         public void StopProcessing()
@@ -44,8 +46,11 @@ namespace CIS526_QueueManager
         public void Dispose()
         {
             StopProcessing();
-            _queue.Close();
-            _queue.Dispose();
+            _producerQueue.Close();
+            _producerQueue.Dispose();
+
+            _consumerQueue.Close();
+            _consumerQueue.Dispose();
         }
 
         #endregion
@@ -55,15 +60,32 @@ namespace CIS526_QueueManager
             if (!_recieving)
                 return;
 
-            Message recievedMessage = _queue.EndReceive(e.AsyncResult);
+            Message recievedMessage = _producerQueue.EndReceive(e.AsyncResult);
             //Let what ever owns this class process the data.
-            recievedMessage.Body = NewMessage(recievedMessage.Label, recievedMessage.Body);
-            recievedMessage.BodyType = 1;
+            Request request = (Request)recievedMessage.Body;
+            Response response = new Response()
+                {
+                    ID = request.ID
+                };
+            try
+            {
+                response.Result = NewMessage(request.Action, (IList<T>)request.Data);
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Result = ex;
+                response.Success = false;
+            }
 
             //Send the processed data back into the queue.
-            _queue.Send(recievedMessage);
+            _consumerQueue.Send(new Message()
+                {
+                    Label = request.ID.ToString(),
+                    Body = response
+                });
             //Look for the next message.
-            _queue.BeginReceive();
+            _producerQueue.BeginReceive();
         }
     }
 }

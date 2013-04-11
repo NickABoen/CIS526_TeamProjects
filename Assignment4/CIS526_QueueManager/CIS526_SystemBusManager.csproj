@@ -112,6 +112,8 @@
     <Compile Include="IMessageQueueConsumer.cs" />
     <Compile Include="IMessageQueueProducer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestWrapper.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

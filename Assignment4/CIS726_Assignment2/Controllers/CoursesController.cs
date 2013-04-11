@@ -24,14 +24,14 @@ namespace CIS726_Assignment2.Controllers
         public CoursesController()
         {
             CourseDBContext context = new CourseDBContext();
-            courses = new MessageQueueRepository<Course>(new BasicMessageQueueProducer(
-                @".\Private$\CourseQueue",
+            courses = new MessageQueueRepository<Course>(new BasicMessageQueueProducer<Course>(
+                @".\Private$\Courses",
                 new XmlMessageFormatter()
                 {
                     TargetTypes = new Type[] { typeof(Course) }
                 }));
-            prerequisiteCourses = new MessageQueueRepository<PrerequisiteCourse>(new BasicMessageQueueProducer(
-                @".\Private$\CourseQueue",
+            prerequisiteCourses = new MessageQueueRepository<PrerequisiteCourse>(new BasicMessageQueueProducer<PrerequisiteCourse>(
+                @".\Private$\Courses",
                 new XmlMessageFormatter()
                 {
                     TargetTypes = new Type[] { typeof(Course) }

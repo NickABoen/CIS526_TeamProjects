@@ -9,66 +9,54 @@ namespace CIS526_QueueManager
     /// <summary>
     /// A basic implementation of the IMessageQueuePublisher
     /// </summary>
-    /// <typeparam name="T">IModel type</typeparam>
-    public class BasicMessageQueueProducer
-        : IMessageQueueProducer
+    public class BasicMessageQueueProducer<T>
+        : IMessageQueueProducer<T>
     {
-        private MessageQueue _queue;
+        private MessageQueue _producerQueue = null; //This is the queue used by the Controller
+        private MessageQueue _consumerQueue = null; //This is the queue used by the database
+
+        private Guid _id;
 
         public BasicMessageQueueProducer(string queueName, IMessageFormatter formatter)
         {
-            if (MessageQueue.Exists(queueName))
-                _queue = new MessageQueue(queueName);
-            else
-                _queue = MessageQueue.Create(queueName);
-            _queue.Formatter = formatter;
+            Util.CreateProducerAndConsumerQueues(queueName,
+                out _producerQueue,
+                out _consumerQueue);
+            _producerQueue.Formatter = new RequestFormatter();
+            _consumerQueue.Formatter = new ResponseFormatter();
+            _id = Guid.NewGuid();
         }
 
         #region IMessageQueueProducer members
 
-        public IList<object> GetAll()
+        public IList<T> GetAll()
         {
-            //Send a message to Get T.
-            string messageId = sendMessage("GET", null);
-
-            //Wait for the database to respond.
-            Message messageToReceive;
-            try
-            {
-                //I guess this breaks if it doesn't find a message. Wonderful.
-                messageToReceive = _queue.ReceiveById(messageId);
-            }
-            catch
-            {
-                messageToReceive = null;
-            }
-
-            //If the message is not null then the database gave use something. Return that.
-            if (messageToReceive != null)
-                return (List<object>)messageToReceive.Body;
-            //Otherwise the database did not respond.
-            return null;
+            sendMessage("GET", null);
+            return reciveMessage();
         }
 
-        public void Update(IList<object> data)
+        public void Update(IList<T> data)
         {
             sendMessage("UPDATE", data);
         }
 
-        public void Create(IList<object> data)
+        public void Create(IList<T> data)
         {
             sendMessage("CREATE", data);
         }
 
-        public void Remove(IList<object> data)
+        public void Remove(IList<T> data)
         {
             sendMessage("REMOVE", data);
         }
 
         public void Dispose()
         {
-            _queue.Close();
-            _queue.Dispose();
+            _producerQueue.Close();
+            _producerQueue.Dispose();
+
+            _consumerQueue.Close();
+            _consumerQueue.Dispose();
         }
 
         #endregion IMessageQueueProducer members
@@ -79,16 +67,39 @@ namespace CIS526_QueueManager
         /// <param name="action">Action for the database to perform.</param>
         /// <param name="data">Data for the database to use.</param>
         /// <returns>The id of the message. This can be used to get the response from the queue.</returns>
-        private string sendMessage(string action, IList<object> data)
+        private string sendMessage(string action, IList<T> data)
         {
             Message messageToSend = new Message();
-            messageToSend.Label = action;
-            messageToSend.Body = data;
-            messageToSend.BodyType = 1;
+            messageToSend.Label = _id.ToString();
+            messageToSend.Body = new Request()
+            {
+                ID = _id,
+                Action = action,
+                Data = data
+            };
 
-            _queue.Send(messageToSend);
+            _consumerQueue.Send(messageToSend);
 
             return messageToSend.Id;
+        }
+
+        private IList<T> reciveMessage()
+        {
+            Response response = null;
+            while (response == null)
+            {
+                foreach (Message m in _consumerQueue.GetAllMessages())
+                {
+                    if (m.Label == _id.ToString())
+                        response = (Response)_consumerQueue.ReceiveById(m.Id).Body;
+                }
+            }
+
+            if (response.Success)
+            {
+                return (IList<T>)response.Result;
+            }
+            return null;
         }
     }
 }

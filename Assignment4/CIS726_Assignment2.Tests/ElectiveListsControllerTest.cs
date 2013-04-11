@@ -39,7 +39,7 @@ namespace CIS726_Assignment2.Tests
                 maxHours = 4,
                 undergrad = true,
                 variable = false,
-                electiveLists = new Collection<ElectiveListCourse>(),
+                electiveLists = new List<ElectiveListCourse>(),
             });
             courses.Add(new Course()
             {
@@ -52,7 +52,7 @@ namespace CIS726_Assignment2.Tests
                 maxHours = 6,
                 graduate = true,
                 variable = false,
-                electiveLists = new Collection<ElectiveListCourse>()
+                electiveLists = new List<ElectiveListCourse>()
             });
             courses.Add(new Course(){
                 ID = 3,
@@ -64,20 +64,20 @@ namespace CIS726_Assignment2.Tests
                 maxHours = 8,
                 undergrad = true,
                 variable = true,
-                electiveLists = new Collection<ElectiveListCourse>()
+                electiveLists = new List<ElectiveListCourse>()
             });
 
             electiveLists.Add(new ElectiveList()
             {
                 ID = 1,
                 electiveListName = "Elective List 1",
-                courses = new Collection<ElectiveListCourse>(),
+                courses = new List<ElectiveListCourse>(),
             });
             electiveLists.Add(new ElectiveList()
             {
                 ID = 2,
                 electiveListName = "Elective List 2",
-                courses = new Collection<ElectiveListCourse>(),
+                courses = new List<ElectiveListCourse>(),
             });
             
             electiveListCourses.Add(new ElectiveListCourse()
@@ -117,7 +117,7 @@ namespace CIS726_Assignment2.Tests
             {
                 ID = 3,
                 electiveListName = "Elective List 3",
-                courses = new Collection<ElectiveListCourse>(),
+                courses = new List<ElectiveListCourse>(),
             };
             return temp;
         }

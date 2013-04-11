@@ -16,9 +16,9 @@ namespace CIS726_Assignment2.Repositories
         : IGenericRepository<T> 
         where T : IModel
     {
-        private IMessageQueueProducer _publisher;
+        private IMessageQueueProducer<T> _publisher;
 
-        public MessageQueueRepository(IMessageQueueProducer publisher)
+        public MessageQueueRepository(IMessageQueueProducer<T> publisher)
         {
             _publisher = publisher;
         }
@@ -30,24 +30,24 @@ namespace CIS726_Assignment2.Repositories
 
         public IQueryable<T> Where(Expression<Func<T, bool>> predicate)
         {
-            return ((IQueryable<T>)_publisher.GetAll()).AsQueryable().Where(predicate);
+            return _publisher.GetAll().AsQueryable().Where(predicate);
         }
 
         public T Find(int id)
         {
             //TODO make this better.
             //Currently querires the list for a specific id.
-            return ((IQueryable<T>)_publisher.GetAll().AsQueryable()).Where((x) => x.ID == id).First();
+            return _publisher.GetAll().AsQueryable().Where((x) => x.ID == id).First();
         }
 
         public void Add(T entity)
         {
-            _publisher.Create(new List<object>() { entity });
+            _publisher.Create(new List<T>() { entity });
         }
 
         public void Remove(T entity)
         {
-            _publisher.Remove(new List<object>() { entity });
+            _publisher.Remove(new List<T>() { entity });
         }
 
         public void Edit(T entity)
@@ -57,7 +57,7 @@ namespace CIS726_Assignment2.Repositories
 
         public void UpdateValues(T entity, T item)
         {
-            _publisher.Update(new List<object>() { item });
+            _publisher.Update(new List<T>() { item });
         }
 
         public void SaveChanges()

@@ -44,6 +44,6 @@ namespace CIS526_Database.Models
         [DisplayName("Starting Semester")]
         public virtual Semester semester { get; set; }
 
-        public virtual ICollection<PlanCourse> planCourses { get; set; }
+        public virtual List<PlanCourse> planCourses { get; set; }
     }
 }

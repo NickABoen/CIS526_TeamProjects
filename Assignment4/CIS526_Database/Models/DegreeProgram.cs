@@ -25,7 +25,7 @@ namespace CIS526_Database.Models
         [DataType(DataType.MultilineText)]
         public String degreeProgramDescription { get; set; }
 
-        public virtual ICollection<RequiredCourse> requiredCourses { get; set; }
-        public virtual ICollection<ElectiveCourse> electiveCourses { get; set; }
+        public virtual List<RequiredCourse> requiredCourses { get; set; }
+        public virtual List<ElectiveCourse> electiveCourses { get; set; }
     }
 }

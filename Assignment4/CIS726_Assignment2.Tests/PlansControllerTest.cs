@@ -105,7 +105,7 @@ namespace CIS726_Assignment2.Tests
                 user = users.Find(1),
                 semesterID = 1,
                 semester = semesters.Find(1),
-                planCourses = new Collection<PlanCourse>()
+                planCourses = new List<PlanCourse>()
             });
 
             plans.Add(new Plan()
@@ -118,7 +118,7 @@ namespace CIS726_Assignment2.Tests
                 user = users.Find(2),
                 semesterID = 2,
                 semester = semesters.Find(2),
-                planCourses = new Collection<PlanCourse>()
+                planCourses = new List<PlanCourse>()
             });
 
         }
@@ -135,7 +135,7 @@ namespace CIS726_Assignment2.Tests
                 user = users.Find(2),
                 semesterID = 2,
                 semester = semesters.Find(2),
-                planCourses = new Collection<PlanCourse>()
+                planCourses = new List<PlanCourse>()
             };
             temp.degreeProgram.requiredCourses = new List<RequiredCourse>();
             temp.degreeProgram.electiveCourses = new List<ElectiveCourse>();

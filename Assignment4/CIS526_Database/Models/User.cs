@@ -26,6 +26,6 @@ namespace CIS526_Database.Models
         [StringLength(100, ErrorMessage="The real name field cannot be longer than 100 characters")]
         public String realName { get; set; }
 
-        public virtual ICollection<Plan> plans { get; set; }
+        public virtual List<Plan> plans { get; set; }
     }
 }

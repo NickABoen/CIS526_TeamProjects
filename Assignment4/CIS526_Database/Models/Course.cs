@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using System.Xml.Serialization;
 
 namespace CIS526_Database.Models
 {
@@ -18,6 +19,7 @@ namespace CIS526_Database.Models
     /// It has a list of degree programs it is a part of and a list of elective lists 
     /// it is contained in
     /// </summary>
+    [XmlRoot]
     public class Course : IModel
     {
         [ScaffoldColumn(false)]
@@ -139,10 +141,10 @@ namespace CIS526_Database.Models
             }
         }
 
-        public virtual ICollection<ElectiveListCourse> electiveLists { get; set; }
-        public virtual ICollection<RequiredCourse> degreePrograms { get; set; }
+        public virtual List<ElectiveListCourse> electiveLists { get; set; }
+        public virtual List<RequiredCourse> degreePrograms { get; set; }
 
-        public virtual ICollection<PrerequisiteCourse> prerequisites { get; set; }
-        public virtual ICollection<PrerequisiteCourse> prerequisiteFor { get; set; }
+        public virtual List<PrerequisiteCourse> prerequisites { get; set; }
+        public virtual List<PrerequisiteCourse> prerequisiteFor { get; set; }
     }
 }

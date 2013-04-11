@@ -15,7 +15,14 @@ namespace CIS526_Database
     // visit http://go.microsoft.com/?LinkId=9394801
     public class MvcApplication : System.Web.HttpApplication
     {
-        private IMessageQueueConsumer _coursesQueue;
+        private IMessageQueueConsumer<Course> _coursesQueue;
+        private CourseDBContext _context;
+
+        public void PretendStart()
+        {
+            _context = new CourseDBContext();
+            InitQueues();
+        }
 
         protected void Application_Start()
         {
@@ -24,6 +31,8 @@ namespace CIS526_Database
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            _context = new CourseDBContext();
 
             InitQueues();
         }
@@ -37,8 +46,8 @@ namespace CIS526_Database
 
         private void InitQueues()
         {
-            _coursesQueue = new BasicMessageQueueConsumer(
-                @"/.Private$/Courses", 
+            _coursesQueue = new BasicMessageQueueConsumer<Course>(
+                @".\Private$\Courses", 
                 new XmlMessageFormatter() 
                 { 
                     TargetTypes = new Type[] { typeof(Course) }
@@ -47,9 +56,30 @@ namespace CIS526_Database
             _coursesQueue.BeginProcessing();
         }
 
-        private IList<object> _coursesQueue_NewMessage(string action, object data)
+        private IList<Course> _coursesQueue_NewMessage(string action, IList<Course> courses)
         {
-            throw new NotImplementedException();
+            if (action == "GET")
+                return (IList<Course>)_context.Courses.AsQueryable().ToList();
+            else
+            {
+                if (action == "CREATE")
+                {
+                    foreach (Course course in courses)
+                        _context.Courses.Add(course);
+                }
+                else if (action == "UPDATE")
+                {
+                    foreach (Course course in courses)
+                        _context.Entry(course).State = System.Data.EntityState.Modified;
+                }
+                else if (action == "REMOVE")
+                {
+                    foreach (Course course in courses)
+                        _context.Courses.Remove(course);
+                }
+                _context.SaveChanges();
+                return null;
+            }
         }
     }
 }

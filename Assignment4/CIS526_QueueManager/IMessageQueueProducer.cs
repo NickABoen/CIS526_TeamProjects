@@ -9,31 +9,31 @@ namespace CIS526_QueueManager
     /// An interface for the Producer to push messages onto a queue.
     /// </summary>
     /// <typeparam name="T">Model type.</typeparam>
-    public interface IMessageQueueProducer
+    public interface IMessageQueueProducer<T>
         : IDisposable
     {
         /// <summary>
         /// Retives all models from the data base.
         /// </summary>
         /// <returns></returns>
-        IList<object> GetAll();
+        IList<T> GetAll();
 
         /// <summary>
         /// Updates all models contained in the list.
         /// </summary>
         /// <param name="data"></param>
-        void Update(IList<object> data);
+        void Update(IList<T> data);
 
         /// <summary>
         /// Creates all models in the database.
         /// </summary>
         /// <param name="data"></param>
-        void Create(IList<object> data);
+        void Create(IList<T> data);
 
         /// <summary>
         /// Removes all models contains in the list from the database.
         /// </summary>
         /// <param name="data"></param>
-        void Remove(IList<object> data);
+        void Remove(IList<T> data);
     }
 }
