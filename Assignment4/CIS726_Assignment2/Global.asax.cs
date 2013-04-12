@@ -27,7 +27,7 @@ namespace CIS726_Assignment2
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            WebSecurity.InitializeDatabaseConnection("CourseDBContext", "Users", "ID", "username", autoCreateTables: true);
+            //WebSecurity.InitializeDatabaseConnection("CourseDBContext", "Users", "ID", "username", autoCreateTables: true);
 
             _databaseApp = new CIS526_Database.MvcApplication();
             _databaseApp.PretendStart(); //I think?

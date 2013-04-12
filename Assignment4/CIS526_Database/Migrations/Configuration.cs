@@ -1,6 +1,5 @@
-/*namespace CIS726_Assignment2.Migrations
+namespace CIS526_Database.Migrations
 {
-    using CIS726_Assignment2.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -9,14 +8,14 @@
     using System.Reflection;
     using WebMatrix.WebData;
     using System.Web.Security;
+    using CIS526_Database.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CIS726_Assignment2.Models.CourseDBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<CourseDBContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
-
 
         /**
          * @russfeld
@@ -25,8 +24,8 @@
          * XMLReader Code from Microsoft Tutorials
          * http://support.microsoft.com/kb/307548
          * 
-         *//*
-        protected override void Seed(CIS726_Assignment2.Models.CourseDBContext context)
+         */
+        protected override void Seed(CourseDBContext context)
         {
             bool seedAll = true;
 
@@ -679,4 +678,4 @@
             }
         }
     }
-}*/
+}

@@ -22,6 +22,7 @@ namespace CIS526_Database.Models
         public DbSet<Semester> Semesters { get; set; }
 
         public CourseDBContext()
+            : base ("CourseDBContext")
         {
             this.Configuration.ProxyCreationEnabled = false;
         }
@@ -30,13 +31,13 @@ namespace CIS526_Database.Models
         {
             modelBuilder.Entity<Course>().HasMany(p => p.electiveLists).WithRequired(i => i.course);
             modelBuilder.Entity<Course>().HasMany(p => p.degreePrograms).WithRequired(i => i.course);
-            modelBuilder.Entity<Course>().HasMany(p => p.prerequisites).WithRequired(i => i.prerequisiteForCourse);
-            modelBuilder.Entity<Course>().HasMany(p => p.prerequisiteFor).WithRequired(i => i.prerequisiteCourse);
+            modelBuilder.Entity<Course>().HasMany(p => p.prerequisites).WithRequired(i => i.prerequisiteForCourse).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Course>().HasMany(p => p.prerequisiteFor).WithRequired(i => i.prerequisiteCourse).WillCascadeOnDelete(false);
             modelBuilder.Entity<DegreeProgram>().HasMany(p => p.requiredCourses).WithRequired(i => i.degreeProgram);
             modelBuilder.Entity<DegreeProgram>().HasMany(p => p.electiveCourses).WithRequired(i => i.degreeProgram);
             modelBuilder.Entity<ElectiveList>().HasMany(p => p.courses).WithRequired(i => i.electiveList);
             modelBuilder.Entity<User>().HasMany(p => p.plans).WithRequired(i => i.user);
-            modelBuilder.Entity<Plan>().HasMany(p => p.planCourses).WithRequired(i => i.plan);
+            modelBuilder.Entity<Plan>().HasMany(p => p.planCourses).WithRequired(i => i.plan).WillCascadeOnDelete(false);
             modelBuilder.Entity<Plan>().HasRequired(p => p.semester);
             modelBuilder.Entity<PlanCourse>().HasRequired(p => p.semester);
             modelBuilder.Entity<PlanCourse>().HasOptional(p => p.electiveList).WithMany().HasForeignKey(r => r.electiveListID);
