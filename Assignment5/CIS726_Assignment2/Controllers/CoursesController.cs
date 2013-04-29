@@ -15,6 +15,9 @@ namespace CIS726_Assignment2.Controllers
     public class CoursesController : Controller
     {
         private ObjectMessageQueue messagequeue;
+
+        private static ControllerCache<Course> courseCache = new ControllerCache<Course>();
+
         /// <summary>
         /// Constructor used by the web application itself
         /// </summary>
@@ -65,10 +68,7 @@ namespace CIS726_Assignment2.Controllers
             bool hoursAsc = false;
             bool numAsc = false;
 
-            List<Course> allCourses = Request<Course>.GetAll("A", "B");
-
-            var courseList = allCourses.AsQueryable();
-            
+            var courseList = courseCache.GetAll().AsQueryable();
 
             if (!String.IsNullOrEmpty(filterString))
             {
@@ -279,7 +279,7 @@ namespace CIS726_Assignment2.Controllers
             }
 
             //setting up needed variables in ViewBag
-            List<string> prefixList = allCourses.Select(x => x.coursePrefix).Distinct().ToList();
+            List<string> prefixList = courseCache.GetAll().Select(x => x.coursePrefix).Distinct().ToList();
             prefixList.Sort();
             prefixList.Insert(0, "any");
             ViewBag.prefixes  = new SelectList(prefixList, selectedPrefix);
@@ -391,7 +391,7 @@ namespace CIS726_Assignment2.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Course course = Request<Course>.GetItemByID(id, "A", "B");
+            Course course = courseCache.Get(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -417,6 +417,7 @@ namespace CIS726_Assignment2.Controllers
             if (ModelState.IsValid)
             {
                 Request<Course>.Add(course, "A", "B");
+                courseCache.Clear();
                 return RedirectToAction("Index");
             }
             return View(course);
@@ -501,7 +502,7 @@ namespace CIS726_Assignment2.Controllers
                     }
                 }
                 Request<Course>.Update(cAttached, course, "A", "B");
-
+                courseCache.Clear();
                 return RedirectToAction("Index");
             }
             if (PrerequisiteCourses != null)
@@ -564,6 +565,7 @@ namespace CIS726_Assignment2.Controllers
         {
 
             bool success = Request<Course>.Delete(id, "A", "B");
+            courseCache.Clear();
             return RedirectToAction("Index");
         }
 
