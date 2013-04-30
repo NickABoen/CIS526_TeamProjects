@@ -1,19 +1,41 @@
-﻿@model IEnumerable<Demo.Models.PointType>
+﻿@model Demo.Models.ScoreboardPointType
 
-<div class="transbox2">
-    <table>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <p>@item.Name</p>
-                </td>
-            </tr>
+<div class="transbox2 navbar">
+    <div class="transbox2Title">
+        Scoreboards
+    </div>
+    <ul>
+        @{
+            bool isTotal = true;
+            string className = "navItem";
         }
-        <tr>
-            <td>
-                <p>Total Score</p>
-            </td>
-        </tr>
-    </table>
+
+        @foreach (var item in Model.PointTypes)
+        {
+            if (item.Name == Model.SelectedPointType) 
+            { 
+                className += " currentScoreboard";
+                isTotal = false;
+            }
+            
+            <li class="@className">
+                <p>
+                    @Html.ActionLink(item.Name,"Index", "Scoreboard",  new { pointType = item.Name }, new { })
+                </p>
+            </li>
+            
+            className = "navItem";
+        }
+
+        @if (isTotal)
+        {
+            className += " currentScoreboard";
+        }
+
+        <li class="@className">
+            <p>
+                @Html.ActionLink("Totals", "Index", "Scoreboard", new { }, new { })
+            </p>
+        </li>
+    </ul>
 </div>

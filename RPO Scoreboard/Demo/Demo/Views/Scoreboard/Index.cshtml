@@ -4,14 +4,13 @@
     ViewBag.Title = "View1";
 }
 
+@{Html.RenderPartial("PointTypesPartial", Model.ScoreboardPointTypes);}
+
 <div class="scoreboardContainer">
     <div class="scoreContainer">
 
         <div>
-        <p class ="Scores">Scores:</p>
-            </div>
-        <div>
-        <p class ="Section">Section Scores:</p>
+            <p class ="Scores">Scores:</p>
         </div>
 
         <!-- This is the scores box
@@ -21,7 +20,6 @@
     </div>
     <!-- This is the navigation box-->
     
-    @{Html.RenderPartial("PointTypesPartial", Model.PointTypes);}
 </div>
 
 <div class="scoreboardDetailContainer">

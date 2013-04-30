@@ -67,6 +67,15 @@ namespace Demo.Migrations
             context.SaveChanges();
         }
 
+        public enum SeedTypes
+        {
+            Attendance,
+            Puzzle,
+            Crosscurricular,
+            Cooperation,
+            Story
+        }
+
         private void seedScores(MasterContext context)
         {
             Random rnd = new Random();
@@ -91,6 +100,11 @@ namespace Demo.Migrations
 
         private void seedTasks(MasterContext context)
         {
+            Random rnd = new Random();
+            Array enumVals = Enum.GetValues(typeof(SeedTypes));
+            SeedTypes st;
+            string typeString = "";
+
             context.Tasks.Add(new Task()
             {
                 Name = "Test Task",
@@ -98,30 +112,83 @@ namespace Demo.Migrations
                 IsMilestone = false,
                 Points = 100,
                 BonusPoints = 0,
-                MaxBonusAwards = 10,
+                MaxBonusAwards = 0,
                 StartTime = DateTime.Now,
                 PointPath = context.PointTypes.Single(pt=>pt.Name.Equals("Puzzle")),
                 EndTime = DateTime.Now.AddDays(14)
             });
 
             context.SaveChanges();
+
+            for (int i = 0; i < 100; i++)
+            {
+                st = (SeedTypes)enumVals.GetValue(rnd.Next(enumVals.Length));
+                typeString = st.ToString();
+
+                context.Tasks.Add(new Task()
+                {
+                    Name = "Random Task " + i,
+                    Description = "A task randomly generated at iteration " + i,
+                    IsMilestone = false,
+                    Points = rnd.Next(1000),
+                    BonusPoints = 0,
+                    MaxBonusAwards = 0,
+                    StartTime = DateTime.Now,
+                    PointPath = context.PointTypes.Single(pt => pt.Name.Equals(typeString)),
+                    EndTime = DateTime.Now.AddHours(12141)
+                });
+            }
+            context.SaveChanges();
         }
+
+        String[] linkArray = {
+                                @"\Content\images\Gate.png",
+                                @"\Content\images\key.png",
+                                @"\Content\images\quarter.png"
+                             };
 
         private void seedMilestones(MasterContext context)
         {
+            Random rnd = new Random();
+            Array enumVals = Enum.GetValues(typeof(SeedTypes));
+            SeedTypes st;
+            string typeString = "";
+
             context.Tasks.Add(new Task()
             {
                 Name = "Test Milestone",
                 Description = "This milestone is for testing purposes only",
                 IsMilestone = true,
-                Points = 1000,
-                BonusPoints = 100,
-                MaxBonusAwards = 10,
+                Points = rnd.Next(1000),
+                BonusPoints = rnd.Next(200),
+                MaxBonusAwards = rnd.Next(20),
                 StartTime = DateTime.Now,
                 PointPath = context.PointTypes.Single(pt => pt.Name.Equals("Attendance")),
                 EndTime = DateTime.Now.AddYears(1),
-                IconLink = @"~\Content\Images\Milestones\iconLink.jpg"
+                IconLink = linkArray[rnd.Next(3)]
             });
+            context.SaveChanges();
+
+            for (int i = 0; i < 10; i++)
+            {
+                st = (SeedTypes)enumVals.GetValue(rnd.Next(enumVals.Length));
+                typeString = st.ToString();
+
+                context.Tasks.Add(new Task()
+                {
+                    Name = "Random Milestone " + i,
+                    Description = "A milestone randomly generated at iteration " + i,
+                    IsMilestone = true,
+                    Points = rnd.Next(1000),
+                    BonusPoints = rnd.Next(200),
+                    MaxBonusAwards = rnd.Next(20),
+                    StartTime = DateTime.Now,
+                    PointPath = context.PointTypes.Single(pt => pt.Name.Equals(typeString)),
+                    EndTime = DateTime.Now.AddHours(12141),
+                    IconLink = linkArray[rnd.Next(3)]
+                });
+            }
+
             context.SaveChanges();
         }
     }

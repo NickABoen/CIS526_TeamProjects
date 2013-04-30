@@ -12,9 +12,28 @@ namespace Demo.Models
     public class ScoreboardViewModel
     {
         [Display(Name="Scoreboard")]
-        public List<UserProfile> Scoreboard { get; set; }
+        public List<ScoreboardRecord> Scoreboard { get; set; }
+
+        [Display(Name = "Point Types")]
+        public ScoreboardPointType ScoreboardPointTypes { get; set; }
+    }
+
+    public class ScoreboardRecord
+    {
+        [Display(Name="User")]
+        public UserProfile User { get; set; }
+
+        [Display(Name="Score")]
+        public int Score { get; set; }
+    }
+
+    public class ScoreboardPointType
+    {
         [Display(Name="Point Types")]
         public List<PointType> PointTypes { get; set; }
+
+        [Display(Name="Selected Point Type")]
+        public string SelectedPointType { get; set; }
     }
 }
 
@@ -44,11 +63,33 @@ namespace Demo.Controllers
 
             //users.Sort(CompareByScore);
 
+            bool pointTypeExists = false;
+
             ScoreboardViewModel svm = new ScoreboardViewModel()
             {
-                Scoreboard = _userRepo.GetAll().ToList(),
-                PointTypes = _pointTypeRepo.GetAll().ToList()
+                Scoreboard = new List<ScoreboardRecord>(),
+                ScoreboardPointTypes = new ScoreboardPointType()
+                {
+                    PointTypes = _pointTypeRepo.GetAll().ToList(),
+                    SelectedPointType = pointType
+                }
             };
+
+            foreach (PointType pt in svm.ScoreboardPointTypes.PointTypes)
+            {
+                pointTypeExists = (pt.Name == pointType);
+
+                if (pointTypeExists) break;
+            }
+
+            foreach (var user in _userRepo.GetAll())
+            {
+                svm.Scoreboard.Add(new ScoreboardRecord()
+                {
+                    User = user,
+                    Score = pointTypeExists ? user.ScoreFor(pointType) : user.TotalScore
+                });
+            }
 
             svm.Scoreboard.Sort(CompareByScore);
 
@@ -64,9 +105,9 @@ namespace Demo.Controllers
             //return RedirectToAction("Index");
         }
 
-        private static int CompareByScore(UserProfile x, UserProfile y)
+        private static int CompareByScore(ScoreboardRecord x, ScoreboardRecord y)
         {
-            return x.TotalScore.CompareTo(y.TotalScore) * -1;
+            return x.Score.CompareTo(y.Score) * -1;
         }
     }
 }

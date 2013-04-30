@@ -5,6 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using Demo.Models;
 using Demo.Repositories;
+using System.ComponentModel.DataAnnotations;
+
+namespace Demo.Models
+{
+    public class TaskViewModel
+    {
+        [Display(Name="Milestones")]
+        public List<Task> MileStones { get; set; }
+
+        [Display(Name="Tasks")]
+        public List<Task> Tasks { get; set; }
+    }
+}
 
 namespace Demo.Controllers
 {
@@ -24,7 +37,13 @@ namespace Demo.Controllers
         // GET: /Task/
         public ActionResult Index()
         {
-            return View(_taskRepo.GetAll());
+            TaskViewModel tvm = new TaskViewModel()
+            {
+                MileStones = _taskRepo.GetAll().Where(tr => tr.IsMilestone == true).ToList(),
+                Tasks = _taskRepo.GetAll().Where(tr=>tr.IsMilestone == false).ToList()
+            };
+
+            return View(tvm);
         }
 
         //

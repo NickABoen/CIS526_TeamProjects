@@ -1,39 +1,38 @@
-﻿@model IEnumerable<Demo.Models.UserProfile>
+﻿@model IEnumerable<Demo.Models.ScoreboardRecord>
 
 <div class="transbox">
-        <table class="leaderboardTable">
-            <tr id="leaderboardHeader">
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TotalScore)
-                </th>
-            </tr>
+    <table class="leaderboardTable">
+        <tr id="leaderboardHeader">
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
+            </th>
+        </tr>
 
-            @{int i = 0;}
-            @foreach (var item in Model)
-            {                
-                string name = "record" + i;
-                int displayValue = i + 1;
-                string classes = "leaderboardRecords";
-                if (i < 10) { classes += " topTen"; }
+        @{int i = 0;}
+        @foreach (var item in Model)
+        {                
+            string name = "record" + i;
+            int displayValue = i + 1;
+            string classes = "leaderboardRecords";
+            if (i < 10) { classes += " topTen"; }
                 
-                <tr class="@classes" id="@name">
-                    <td>
-                        @displayValue.
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TotalScore)
-                    </td>
-                </tr>
+            <tr class="@classes" id="@name">
+                <td>
+                    @displayValue.
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Score)
+                </td>
+            </tr>
         
-                i++;
-            }
-        </table>
-    </div>
+            i++;
+        }
+    </table>
 </div>

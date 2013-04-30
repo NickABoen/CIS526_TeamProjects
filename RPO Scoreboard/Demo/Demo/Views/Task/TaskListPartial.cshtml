@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Demo.Models.Task>
+
+<div class="taskTransbox">
+    <p>Tasks</p>
+    <table class="taskPageTable">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Points)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PointPath.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Points)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PointPath.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTimeDisplay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTimeDisplay)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

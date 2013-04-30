@@ -39,6 +39,7 @@ namespace Demo.Models
                 if (score.PointPath.Name == pointType)
                     return score.Score;
             }
+
             return 0;
         }
 
